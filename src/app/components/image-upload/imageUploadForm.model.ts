@@ -1,6 +1,6 @@
 export interface IuploadImageForm {
     ImageType: string;
-    file: any | null;
+    file: File | null;
     filePath: string | null;
     required: boolean;
     uploaded: boolean;

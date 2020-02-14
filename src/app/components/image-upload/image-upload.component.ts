@@ -89,13 +89,11 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
         });
     }
 
-    getImage(id: string, event) {
-        if (event.target.files && event.target.files[0]) {
-            console.log(event.target.files);
-            console.log(event.target.files, 'file being attached');
-            const output = URL.createObjectURL(event.target.files[0]);
-            this.uploadFiles[this.findObjectFromArray(id)].file =
-                event.target.files;
+    getImage(id: string, files: FileList) {
+        if (files) {
+            console.log(files.item(0));
+            const output = URL.createObjectURL(files.item(0));
+            this.uploadFiles[this.findObjectFromArray(id)].file = files.item(0);
             this.uploadFiles[this.findObjectFromArray(id)].filePath = output;
         } else {
             this.uploadFiles[this.findObjectFromArray(id)].filePath = null;
@@ -106,14 +104,17 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
     }
 
     sendThatFormIsValid() {
-        const everyFieldisUploaded = (imageObject: IuploadImageForm) =>
-            imageObject.filePath && imageObject.required;
+        // const everyFieldisUploaded = (imageObject: IuploadImageForm) =>
+        //   imageObject.filePath && imageObject.required;
         this.imageUploadService.allRequiredImagesUploaded.emit(
             this.formisValid(this.uploadFiles)
         );
     }
 
     formisValid(obj: Array<IuploadImageForm>): boolean {
+        // if (obj[0].required && obj[0].filePath) {
+        //   return true;
+        // }
         return (
             obj[0].required &&
             obj[0].filePath &&

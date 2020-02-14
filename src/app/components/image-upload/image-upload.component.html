@@ -6,7 +6,7 @@
                     <img [src]="uploadFile.filePath | sanitizer" />
                     <button
                         class="btn"
-                        (change)="removeImage(uploadFile.ImageType)"
+                        (click)="removeImage(uploadFile.ImageType)"
                     >
                         X
                     </button>
@@ -20,7 +20,7 @@
                     type="file"
                     accept="image/*"
                     (change)="
-                        getImage(uploadFile.ImageType, $event);
+                        getImage(uploadFile.ImageType, $event.target.files);
                         sendThatFormIsValid()
                     "
                     [attr.id]="uploadFile.ImageType"

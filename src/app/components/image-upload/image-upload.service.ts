@@ -13,10 +13,10 @@ export class ImageUploadService {
         boolean
     >();
     constructor(private http: HttpClient) {}
-    private headers = new HttpHeaders({
-        'Content-Type': 'multipart/form-data;',
-        Accept: '*/*',
-    });
+    //   private headers = new HttpHeaders({
+    //     'Content-Type': 'multipart/form-data;',
+    //     Accept: '*/*',
+    //   });
 
     updateImage(id: string, imageResponse: any): Observable<any> {
         const httpParams = new HttpParams().set('id', id);
@@ -34,8 +34,10 @@ export class ImageUploadService {
         // setup formdata for images
         const fd = new FormData();
         for (const file of body) {
-            fd.append(file.ImageType, file.file, file.file.Name);
+            console.log(file, 'files');
+            fd.append(file.ImageType, file.file, file.file.name);
         }
+        // console.log(fd);
         return this.http.post(
             `${environment.filmsApi}/mobile/attachImages`,
             fd,
@@ -43,7 +45,6 @@ export class ImageUploadService {
                 params: httpParams,
                 reportProgress: true,
                 observe: 'events',
-                headers: this.headers,
             }
         );
     }
