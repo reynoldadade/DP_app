@@ -1,0 +1,27 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col [sizeMd]="4" [offsetMd]="4">
+        <div class="loginForm">
+          <form [formGroup]="loginForm" (submit)="login(loginForm)">
+            <ion-item>
+              <ion-label [position]="'stacked'">Username</ion-label>
+              <ion-input [formControlName]="'userName'"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label [position]="'stacked'">Password</ion-label>
+              <ion-input [formControlName]="'password'" [type]="passwordType"></ion-input>
+              <ion-icon [name]="passwordIcon" slot="end" (click)="hideShowPassword()"></ion-icon>
+            </ion-item>
+            <div class="ion-margin-top">
+              <a slot="start">Forgot Password</a>
+            </div>
+            <ion-button [expand]="'full'" class="ion-margin-top" type="submit" [disabled]="loginForm.invalid">
+              Sign In <ion-spinner *ngIf="spinner"></ion-spinner>
+            </ion-button>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title text-center>Account Statement</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col [sizeMd]="4" [offsetMd]="4">
+                <ion-card>
+                    <ion-card-content>
+                        <form
+                            [formGroup]="ledgerForm"
+                            (submit)="getAgentLedger(ledgerForm)"
+                        >
+                            <ion-item>
+                                <ion-label>Start Date</ion-label>
+                                <ion-datetime
+                                    placeholder="Select Date"
+                                    [formControlName]="'startDate'"
+                                    [max]="today"
+                                ></ion-datetime>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>End Date</ion-label>
+                                <ion-datetime
+                                    placeholder="Select Date"
+                                    [formControlName]="'endDate'"
+                                ></ion-datetime>
+                            </ion-item>
+                            <ion-button
+                                [expand]="'full'"
+                                type="submit"
+                                [disabled]="ledgerForm.invalid"
+                            >
+                                Search transactions<ion-spinner
+                                    *ngIf="spinner"
+                                ></ion-spinner>
+                            </ion-button>
+                        </form>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col [sizeMd]="4" [offsetMd]="4">
+                <ion-list>
+                    <ion-item *ngFor="let transaction of ledger">
+                        <ion-label class="eligibility">
+                            <h2>
+                                Date:
+                                {{transaction.Posting_Date|date:'shortDate'}}
+                            </h2>
+                            <h2>Amount: {{transaction.Amount}}</h2>
+                            <h2>Reason: {{transaction.Description}}</h2>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,1688 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "FilmsWebAPI"
+    },
+    "host": "52.91.63.84",
+    "basePath": "/FilmsWeb",
+    "schemes": ["http"],
+    "paths": {},
+    "definitions": {
+        "ChangeModel": {
+            "type": "object",
+            "properties": {
+                "AppVersion": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Url": {
+                    "type": "string"
+                }
+            }
+        },
+        "AgentModel": {
+            "type": "object",
+            "properties": {
+                "DalexCode": {
+                    "type": "string"
+                },
+                "Lastname": {
+                    "type": "string"
+                },
+                "OtherNames": {
+                    "type": "string"
+                },
+                "Address1": {
+                    "type": "string"
+                },
+                "Address2": {
+                    "type": "string"
+                },
+                "MobilePhoneNo": {
+                    "type": "string"
+                },
+                "Gender": {
+                    "type": "string"
+                },
+                "MaritalStatus": {
+                    "type": "string"
+                },
+                "Title": {
+                    "type": "string"
+                },
+                "DateOfBirth": {
+                    "type": "string"
+                },
+                "EmploymentDate": {
+                    "type": "string"
+                },
+                "SSfNo": {
+                    "type": "string"
+                },
+                "VotersId": {
+                    "type": "string"
+                },
+                "Division": {
+                    "type": "string"
+                },
+                "BranchCode": {
+                    "type": "string"
+                },
+                "VintageDp": {
+                    "type": "boolean",
+                    "readOnly": true
+                }
+            }
+        },
+        "EmailAddress": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Address": {
+                    "type": "string"
+                }
+            }
+        },
+        "LoanRecovery": {
+            "type": "object",
+            "properties": {
+                "StaffId": {
+                    "type": "string"
+                },
+                "District": {
+                    "type": "string"
+                },
+                "Region": {
+                    "type": "string"
+                },
+                "PhysicalAddress": {
+                    "type": "string"
+                },
+                "ClientActivePhone": {
+                    "type": "string"
+                },
+                "CurrentEmployment": {
+                    "type": "string"
+                },
+                "CurrentNextofKin": {
+                    "type": "string"
+                },
+                "NokActivePhone": {
+                    "type": "string"
+                },
+                "DateClientContacted": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ClientCurrentStatus": {
+                    "type": "string"
+                },
+                "IsClientworking": {
+                    "type": "boolean"
+                },
+                "ClientFeedback": {
+                    "type": "string"
+                },
+                "ClientRebookPassword": {
+                    "type": "string"
+                },
+                "AffordabilityLocked": {
+                    "type": "boolean"
+                },
+                "Amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "AffordAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "PaymentArrangement": {
+                    "type": "string"
+                },
+                "ModeOfPayment": {
+                    "type": "string"
+                },
+                "Actions": {
+                    "type": "string"
+                },
+                "RecoveryOfficer": {
+                    "type": "string"
+                },
+                "ClientName": {
+                    "type": "string"
+                },
+                "ArrangementDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ModeOfContact": {
+                    "type": "string"
+                },
+                "NOKContact": {
+                    "type": "string"
+                },
+                "NOKName": {
+                    "type": "string"
+                },
+                "ModifiedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ClientContact": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateRecoveryModel": {
+            "type": "object",
+            "properties": {
+                "District": {
+                    "type": "string"
+                },
+                "Region": {
+                    "type": "string"
+                },
+                "PhysicalAddress": {
+                    "type": "string"
+                },
+                "ClientName": {
+                    "type": "string"
+                },
+                "ClientActivePhone": {
+                    "type": "string"
+                },
+                "CurrentEmployment": {
+                    "type": "string"
+                },
+                "ClientRebookPassword": {
+                    "type": "string"
+                },
+                "CurrentNextOfKin": {
+                    "type": "string"
+                },
+                "NokActivePhone": {
+                    "type": "string"
+                },
+                "DateClientContacted": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "IsClientWorking": {
+                    "type": "boolean"
+                },
+                "AffordabilityLocked": {
+                    "type": "boolean"
+                },
+                "Amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "AffordAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "PaymentArrangement": {
+                    "type": "string"
+                },
+                "ArrangementDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "ModeOfPayment": {
+                    "type": "string"
+                },
+                "RecoveryOfficer": {
+                    "type": "string"
+                },
+                "ModeOfContact": {
+                    "type": "string"
+                },
+                "NokContact": {
+                    "type": "string"
+                },
+                "NokName": {
+                    "type": "string"
+                },
+                "ClientContact": {
+                    "type": "string"
+                }
+            }
+        },
+        "RecoveryRequestModel": {
+            "type": "object",
+            "properties": {
+                "StaffId": {
+                    "type": "string"
+                },
+                "StaffName": {
+                    "type": "string"
+                },
+                "LoanNo": {
+                    "type": "string"
+                },
+                "LoanDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "LoanAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "SettlementAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "SettlementCharges": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Balance": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "PaymentMobileNumber": {
+                    "type": "string"
+                },
+                "PaymentNetworkProvider": {
+                    "type": "string"
+                },
+                "PaymentAuthorized": {
+                    "type": "boolean"
+                },
+                "ContactNumber": {
+                    "type": "string"
+                },
+                "StatusByUserId": {
+                    "type": "string"
+                },
+                "StatusDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "RecoveryOfficerCode": {
+                    "type": "string"
+                },
+                "RecoveryOfficerPhone": {
+                    "type": "string"
+                },
+                "MonthlyInstallments": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "UserRequest": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceData": {
+            "type": "object",
+            "properties": {
+                "Status": {
+                    "type": "string"
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "Data": {
+                    "type": "string"
+                }
+            }
+        },
+        "NonControllerRequest": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "EmployeeId": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "UserId": {
+                    "type": "string"
+                },
+                "CreatedByDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "Affordability": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Note": {
+                    "type": "string"
+                },
+                "EmployerType": {
+                    "type": "string"
+                },
+                "LoanType": {
+                    "type": "string"
+                }
+            }
+        },
+        "PaymentRequest": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "LoanRefId": {
+                    "type": "string"
+                },
+                "ClientRefId": {
+                    "type": "string"
+                },
+                "ClientName": {
+                    "type": "string"
+                },
+                "LoanType": {
+                    "type": "string"
+                },
+                "TransactionType": {
+                    "type": "string"
+                },
+                "Branch": {
+                    "type": "string"
+                },
+                "PaymentMethod": {
+                    "type": "string"
+                },
+                "AccountNumber": {
+                    "type": "string"
+                },
+                "TNT_DPCode": {
+                    "type": "string"
+                },
+                "Deal_DPCode": {
+                    "type": "string"
+                },
+                "MobileNumber": {
+                    "type": "string"
+                },
+                "ContactNumber": {
+                    "type": "string"
+                },
+                "TLCode": {
+                    "type": "string"
+                },
+                "EmployerName": {
+                    "type": "string"
+                },
+                "Tenor": {
+                    "type": "string"
+                },
+                "GrossAmount": {
+                    "type": "string"
+                },
+                "NetAmount": {
+                    "type": "string"
+                },
+                "TransactionStatus": {
+                    "type": "string"
+                },
+                "IsReplaced": {
+                    "type": "boolean"
+                },
+                "ErrorCode": {
+                    "type": "string"
+                },
+                "ErrorReason": {
+                    "type": "string"
+                },
+                "StatusByUser": {
+                    "type": "string"
+                },
+                "StatusDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "SelfieFileName": {
+                    "type": "string"
+                },
+                "VoterFileName": {
+                    "type": "string"
+                },
+                "PassportPictureFileName": {
+                    "type": "string"
+                },
+                "LoanAdvanceFormFileName": {
+                    "type": "string"
+                },
+                "SelfieCode": {
+                    "type": "string"
+                },
+                "FormAFileName": {
+                    "type": "string"
+                },
+                "AppointmentLetterFileName": {
+                    "type": "string"
+                },
+                "TransferFileName": {
+                    "type": "string"
+                },
+                "NavLoanId": {
+                    "type": "string"
+                },
+                "Commission": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Overider": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "CreatedByUser": {
+                    "type": "string"
+                },
+                "CreatedByDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "MandateNumber": {
+                    "type": "string"
+                },
+                "MandateNumber2": {
+                    "type": "string"
+                },
+                "LoanAdvanceNumber": {
+                    "type": "string"
+                },
+                "AuthorityNoteNumber": {
+                    "type": "string"
+                },
+                "IDCardNumber": {
+                    "type": "string"
+                },
+                "EmployerTypeId": {
+                    "type": "string"
+                },
+                "Affordability": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Instructions": {
+                    "type": "string"
+                },
+                "TinNumber": {
+                    "type": "string"
+                },
+                "Comments": {
+                    "type": "string"
+                },
+                "UserBranch": {
+                    "type": "string"
+                },
+                "paymentBranchAlt": {
+                    "type": "string"
+                },
+                "paymentMethodAlt": {
+                    "type": "string"
+                },
+                "paymentNumberAlt": {
+                    "type": "string"
+                },
+                "paymentProviderAlt": {
+                    "type": "string"
+                },
+                "bankAccountNumber": {
+                    "type": "string"
+                },
+                "paymentmobileNumber": {
+                    "type": "string"
+                },
+                "refundmessage": {
+                    "type": "string"
+                },
+                "monthlyinstallments": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "PaymentName": {
+                    "type": "string"
+                },
+                "AltType": {
+                    "type": "string"
+                },
+                "SelfieToken": {
+                    "type": "string"
+                },
+                "AutoPostResult": {
+                    "type": "string"
+                }
+            }
+        },
+        "NavloanRequest": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "NavLoanId": {
+                    "type": "string"
+                },
+                "NetAmount": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "RequestLoanRequest": {
+            "type": "object",
+            "properties": {
+                "staffid": {
+                    "type": "string"
+                },
+                "grossAmount": {
+                    "type": "string"
+                },
+                "tenor": {
+                    "type": "string"
+                },
+                "loantype": {
+                    "type": "string"
+                },
+                "paymentBranch": {
+                    "type": "string"
+                },
+                "paymentMethod": {
+                    "type": "string"
+                },
+                "DPCode": {
+                    "type": "string"
+                },
+                "DealDPCode": {
+                    "type": "string"
+                },
+                "contactNumber": {
+                    "type": "string"
+                },
+                "paymobileNumber": {
+                    "type": "string"
+                },
+                "selfFileName": {
+                    "type": "string"
+                },
+                "selfieDPCode": {
+                    "type": "string"
+                },
+                "TLCode": {
+                    "type": "string"
+                },
+                "bankAccountNumber": {
+                    "type": "string"
+                },
+                "voterFileName": {
+                    "type": "string"
+                },
+                "passportPictureFileName": {
+                    "type": "string"
+                },
+                "loanAdvanceFormFileName": {
+                    "type": "string"
+                },
+                "formAFileName": {
+                    "type": "string"
+                },
+                "appointmentLetterFileName": {
+                    "type": "string"
+                },
+                "transferLetterFileName": {
+                    "type": "string"
+                },
+                "clientName": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "mandatenumber": {
+                    "type": "string"
+                },
+                "mandatenumber2": {
+                    "type": "string"
+                },
+                "loanadvancenumber": {
+                    "type": "string"
+                },
+                "authoritynote": {
+                    "type": "string"
+                },
+                "tinNumber": {
+                    "type": "string"
+                },
+                "idcard": {
+                    "type": "string"
+                },
+                "employeetypeid": {
+                    "type": "string"
+                },
+                "affordability": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "paymentBranchAlt": {
+                    "type": "string"
+                },
+                "paymentNumberAlt": {
+                    "type": "string"
+                },
+                "paymentMethodAlt": {
+                    "type": "string"
+                },
+                "bankAccountNumberAlt": {
+                    "type": "string"
+                },
+                "PaymentName": {
+                    "type": "string"
+                },
+                "paymobileNumberAlt": {
+                    "type": "string"
+                },
+                "comments": {
+                    "type": "string"
+                },
+                "selfieToken": {
+                    "type": "string"
+                }
+            }
+        },
+        "SettlementResponse": {
+            "type": "object",
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "TotalOutstanding": {
+                    "type": "string"
+                },
+                "LoanAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "TotalPaid": {
+                    "type": "string"
+                },
+                "TotalRemaining": {
+                    "type": "string"
+                },
+                "Commission": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "LoanType": {
+                    "type": "string"
+                },
+                "ReplacementAmountDue": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "OutrightAmountDue": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "ReplacementEligibility": {
+                    "type": "string"
+                },
+                "OutrightEligibility": {
+                    "type": "string"
+                }
+            }
+        },
+        "ImageResponse": {
+            "type": "object",
+            "properties": {
+                "selfFileName": {
+                    "type": "string"
+                },
+                "voterFileName": {
+                    "type": "string"
+                },
+                "passportPictureFileName": {
+                    "type": "string"
+                },
+                "loanAdvanceFormFileName": {
+                    "type": "string"
+                },
+                "formAFileName": {
+                    "type": "string"
+                },
+                "appointmentLetterFileName": {
+                    "type": "string"
+                },
+                "transferLetterFileName": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "string"
+                }
+            }
+        },
+        "ImagePostRequest": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "Image": {
+                    "type": "string"
+                },
+                "Type": {
+                    "type": "string"
+                }
+            }
+        },
+        "CancelLoanrequest": {
+            "type": "object",
+            "properties": {
+                "loanid": {
+                    "type": "string"
+                },
+                "userid": {
+                    "type": "string"
+                }
+            }
+        },
+        "SettlementRequest": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "InvoiceNo": {
+                    "type": "string"
+                },
+                "RequestDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "StaffId": {
+                    "type": "string"
+                },
+                "StaffName": {
+                    "type": "string"
+                },
+                "LoanNo": {
+                    "type": "string"
+                },
+                "LoanDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "LoanAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "SettlementAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "SettlementCharges": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "SettlementTotal": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "Balance": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "SettlementType": {
+                    "type": "string"
+                },
+                "PaymentMobileNumber": {
+                    "type": "string"
+                },
+                "PaymentNetworkProvider": {
+                    "type": "string"
+                },
+                "PaymentUserCode": {
+                    "type": "string"
+                },
+                "PaymentAuthorized": {
+                    "type": "boolean"
+                },
+                "ChequeNumber": {
+                    "type": "string"
+                },
+                "ChequeBank": {
+                    "type": "string"
+                },
+                "ChequeSortCode": {
+                    "type": "string"
+                },
+                "ChequeAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "ChequeIssuerName": {
+                    "type": "string"
+                },
+                "Branch": {
+                    "type": "string"
+                },
+                "ContactNumber": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "StatusByUserId": {
+                    "type": "string"
+                },
+                "StatusDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "SettlementTLCode": {
+                    "type": "string"
+                },
+                "CreatedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "MonthlyInstallments": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "tlPhoneNumber": {
+                    "type": "string"
+                }
+            }
+        },
+        "requestAdvanceResult": {
+            "type": "object",
+            "properties": {
+                "usercode": {
+                    "type": "string"
+                },
+                "amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "tlCode": {
+                    "type": "string"
+                },
+                "availableBal": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "pin": {
+                    "type": "string"
+                }
+            }
+        },
+        "approveDpAdvance": {
+            "type": "object",
+            "properties": {
+                "usercode": {
+                    "type": "string"
+                },
+                "dpAdvanceId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "pin": {
+                    "type": "string"
+                }
+            }
+        },
+        "AppRoleModel": {
+            "type": "object",
+            "properties": {
+                "RoleName": {
+                    "type": "string"
+                },
+                "Features": {
+                    "type": "string"
+                }
+            }
+        },
+        "transResponse": {
+            "type": "object",
+            "properties": {
+                "trans_id": {
+                    "type": "string"
+                },
+                "trans_ref": {
+                    "type": "string"
+                },
+                "trans_status": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "SettlementData": {
+            "type": "object",
+            "properties": {
+                "EmployeeId": {
+                    "type": "string"
+                },
+                "LoanNo": {
+                    "type": "string"
+                },
+                "SettlementType": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "operationPostMessage": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "operationDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "paymentDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "invoiceNo": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "to_phoneNumber": {
+                    "type": "string"
+                },
+                "amount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "provider": {
+                    "type": "string"
+                },
+                "to_provider": {
+                    "type": "string"
+                },
+                "telco_id": {
+                    "type": "string"
+                },
+                "referencetext": {
+                    "type": "string"
+                }
+            }
+        },
+        "PaymentMethod": {
+            "type": "object",
+            "properties": {
+                "PaymentMethodId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "PaymentMethodName": {
+                    "type": "string"
+                }
+            }
+        },
+        "LoanHistoryView": {
+            "type": "object",
+            "properties": {
+                "Status": {
+                    "type": "string"
+                },
+                "StatusDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "LoanNo": {
+                    "type": "string"
+                },
+                "EmployeeId": {
+                    "type": "string"
+                },
+                "StatusHistoryId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "StatusByUser": {
+                    "type": "string"
+                }
+            }
+        },
+        "ChangeUserModel": {
+            "type": "object",
+            "properties": {
+                "OldUserCode": {
+                    "type": "string"
+                },
+                "NewUserCode": {
+                    "type": "string"
+                },
+                "TeamCode": {
+                    "type": "string"
+                },
+                "UserBranch": {
+                    "type": "string"
+                },
+                "UserRoleId": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "LoginResponse": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Permission": {
+                    "type": "string"
+                },
+                "LastLogin": {
+                    "type": "string"
+                },
+                "Branch": {
+                    "type": "string"
+                },
+                "PaymentMethod": {
+                    "type": "string"
+                },
+                "Role": {
+                    "type": "string"
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "TeamCode": {
+                    "type": "string"
+                },
+                "AccessCode": {
+                    "type": "string"
+                },
+                "UserRoles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/UserRole"
+                    }
+                }
+            }
+        },
+        "UserRole": {
+            "type": "object",
+            "properties": {
+                "UserRoleId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "RoleName": {
+                    "type": "string"
+                },
+                "Apps": {
+                    "type": "string"
+                },
+                "Features": {
+                    "type": "string"
+                }
+            }
+        },
+        "QuestionData": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "QuestionName": {
+                    "type": "string"
+                }
+            }
+        },
+        "QuestionAnswer": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "StaffId": {
+                    "type": "string"
+                },
+                "StaffName": {
+                    "type": "string"
+                },
+                "Question": {
+                    "type": "string"
+                },
+                "Answer": {
+                    "type": "string"
+                },
+                "CreatedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "LoanId": {
+                    "type": "string"
+                },
+                "QuestionId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "UserId": {
+                    "type": "string"
+                },
+                "UserDate": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "ErrorId": {
+                    "type": "string"
+                },
+                "ErrorName": {
+                    "type": "string"
+                }
+            }
+        },
+        "CreditCheckResponse": {
+            "type": "object",
+            "properties": {
+                "EmployeeID": {
+                    "type": "string"
+                },
+                "Age": {
+                    "type": "string"
+                },
+                "Reason": {
+                    "type": "string"
+                },
+                "Tenor": {
+                    "type": "string"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "DOB": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "FullName": {
+                    "type": "string"
+                },
+                "AssignmentStatus": {
+                    "type": "string"
+                },
+                "Gender": {
+                    "type": "string"
+                },
+                "Job": {
+                    "type": "string"
+                },
+                "Organization": {
+                    "type": "string"
+                },
+                "HireDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Department": {
+                    "type": "string"
+                },
+                "Ministry": {
+                    "type": "string"
+                },
+                "SSN": {
+                    "type": "string"
+                },
+                "BankName": {
+                    "type": "string"
+                },
+                "BankBranch": {
+                    "type": "string"
+                },
+                "Location": {
+                    "type": "string"
+                },
+                "District": {
+                    "type": "string"
+                },
+                "Region": {
+                    "type": "string"
+                },
+                "SSNExempt": {
+                    "type": "string"
+                }
+            }
+        },
+        "MessageUser": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "type": "string"
+                },
+                "DeviceTokenRecipient": {
+                    "type": "string"
+                },
+                "Message": {
+                    "type": "string"
+                },
+                "MessageDate": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            }
+        },
+        "SettlementReceipt": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "receiptDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "receiptAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "receiptClient": {
+                    "type": "string"
+                },
+                "receiptClientPhone": {
+                    "type": "string"
+                },
+                "receiptTLName": {
+                    "type": "string"
+                },
+                "receiptTLCode": {
+                    "type": "string"
+                },
+                "receiptLoanNo": {
+                    "type": "string"
+                },
+                "receiptNumber": {
+                    "type": "string"
+                },
+                "receiptMessage": {
+                    "type": "string"
+                },
+                "receiptChequeNumber": {
+                    "type": "string"
+                },
+                "receiptType": {
+                    "type": "string"
+                },
+                "receiptPaymentNumber": {
+                    "type": "string"
+                },
+                "receiptBankName": {
+                    "type": "string"
+                },
+                "receiptClientName": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserRegistry": {
+            "type": "object",
+            "properties": {
+                "UserCode": {
+                    "type": "string"
+                },
+                "UserRoleId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "DeviceID": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Firstname": {
+                    "type": "string"
+                },
+                "Lastname": {
+                    "type": "string"
+                },
+                "Othername": {
+                    "type": "string"
+                },
+                "TeamCode": {
+                    "type": "string"
+                },
+                "DateOfBirth": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Age": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "TelephoneNumber": {
+                    "type": "string"
+                },
+                "TelephoneNumber2": {
+                    "type": "string"
+                },
+                "TelephoneNumber3": {
+                    "type": "string"
+                },
+                "CUGNumber": {
+                    "type": "string"
+                },
+                "EmailAddress": {
+                    "type": "string"
+                },
+                "Address": {
+                    "type": "string"
+                },
+                "Hometown": {
+                    "type": "string"
+                },
+                "IDType": {
+                    "type": "string"
+                },
+                "IDNumber": {
+                    "type": "string"
+                },
+                "MaritalStatus": {
+                    "type": "string"
+                },
+                "NextOfKinRelationship": {
+                    "type": "string"
+                },
+                "NextOfKin": {
+                    "type": "string"
+                },
+                "BankName": {
+                    "type": "string"
+                },
+                "BankAccount": {
+                    "type": "string"
+                },
+                "Branch": {
+                    "type": "string"
+                },
+                "PaymentMethod": {
+                    "type": "string"
+                },
+                "HighestQualification": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                },
+                "Permission": {
+                    "type": "boolean"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "StatusReason": {
+                    "type": "string"
+                },
+                "StatusDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "UserBranch": {
+                    "type": "string"
+                },
+                "Pin": {
+                    "type": "string"
+                },
+                "CommissionPercentage": {
+                    "format": "double",
+                    "type": "number"
+                }
+            }
+        },
+        "ImageListModel": {
+            "type": "object",
+            "properties": {
+                "ImageURL": {
+                    "type": "string"
+                },
+                "Date": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "AssociatedTLDPID": {
+                    "type": "string"
+                }
+            }
+        },
+        "NotifyMessage": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "usercode": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "EligibilityData": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "EmployeeId": {
+                    "type": "string"
+                },
+                "DOB": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "FullName": {
+                    "type": "string"
+                },
+                "AssignmentStatus": {
+                    "type": "string"
+                },
+                "Gender": {
+                    "type": "string"
+                },
+                "Job": {
+                    "type": "string"
+                },
+                "Organization": {
+                    "type": "string"
+                },
+                "HireDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "Department": {
+                    "type": "string"
+                },
+                "Ministry": {
+                    "type": "string"
+                },
+                "SSN": {
+                    "type": "string"
+                },
+                "BankName": {
+                    "type": "string"
+                },
+                "BankBranch": {
+                    "type": "string"
+                },
+                "Location": {
+                    "type": "string"
+                },
+                "District": {
+                    "type": "string"
+                },
+                "Region": {
+                    "type": "string"
+                },
+                "SSNExempt": {
+                    "type": "string"
+                },
+                "IsPupilTeacher": {
+                    "type": "string"
+                },
+                "IsTeacherTrainee": {
+                    "type": "string"
+                },
+                "CreatedByUser": {
+                    "type": "string"
+                },
+                "CreatedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "IsBlacklisted": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "LoanIssueResponse": {
+            "type": "object",
+            "properties": {
+                "StaffId": {
+                    "type": "string"
+                },
+                "StaffName": {
+                    "type": "string"
+                },
+                "Category": {
+                    "type": "string"
+                },
+                "Description": {
+                    "type": "string"
+                },
+                "SubmittedById": {
+                    "type": "string"
+                },
+                "SubmittedByName": {
+                    "type": "string"
+                },
+                "TicketNumber": {
+                    "type": "string"
+                },
+                "IssueStatus": {
+                    "type": "string"
+                },
+                "IssueType": {
+                    "type": "string"
+                },
+                "Note": {
+                    "type": "string"
+                },
+                "TicketCreatedDate": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            }
+        },
+        "RefundRequest": {
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Employer": {
+                    "type": "string"
+                },
+                "EmployeeID": {
+                    "type": "string"
+                },
+                "ContactPhoneNumber": {
+                    "type": "string"
+                },
+                "PaymentMode": {
+                    "type": "string"
+                },
+                "Reason": {
+                    "type": "string"
+                },
+                "SettlementAmount": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "SettlementMonth": {
+                    "type": "string"
+                },
+                "SettlementYear": {
+                    "type": "string"
+                },
+                "Notes": {
+                    "type": "string"
+                },
+                "RefundStatus": {
+                    "type": "string"
+                },
+                "CreatedByDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "StatusByDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "CreatedByUser": {
+                    "type": "string"
+                },
+                "StatusByUser": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

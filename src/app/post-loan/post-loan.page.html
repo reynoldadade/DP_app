@@ -1,0 +1,348 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-buttons slot="end">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Post A Loan</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col [sizeMd]="8" [offsetMd]="2">
+                <form
+                    [formGroup]="requestLoanForm"
+                    (submit)="postLoan(requestLoanForm)"
+                >
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Staff ID
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            readonly
+                            formControlName="staffid"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Name of Client
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            readonly
+                            formControlName="clientName"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Loan Amount
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="grossAmount"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Loans</ion-label>
+                        <ion-item *ngFor="let activeLoan of activeLoans">
+                            <ion-checkbox
+                                slot="start"
+                                (click)="getLoan(activeLoan, $event)"
+                            ></ion-checkbox>
+                            <ion-label
+                                >{{activeLoan.Loan_No}} |
+                                {{activeLoan.ReplacementAmountDue}}</ion-label
+                            >
+                        </ion-item>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Existing Loan Balance
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            readonly
+                            formControlName="existingBalance"
+                            [value]="replacementBalance"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Tenor
+                        </ion-label>
+                        <ion-input
+                            type="number"
+                            formControlName="tenor"
+                            max="{{eligibilityData.Tenor | numberFilter}}"
+                            min="0"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Payment Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="paymobileNumber"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Mode of Payment
+                        </ion-label>
+                        <ion-select
+                            interface="popover"
+                            type="text"
+                            formControlName="paymentMethod"
+                        >
+                            <ion-select-option
+                                *ngFor="let paymentMethod of paymentMethods"
+                                [value]="paymentMethod.PaymentMethodName"
+                                >{{paymentMethod.PaymentMethodName}}</ion-select-option
+                            >
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Choose Loan Type
+                        </ion-label>
+                        <ion-select
+                            interface="popover"
+                            type="text"
+                            formControlName="loantype"
+                        >
+                            <ion-select-option
+                                *ngFor="let loanType of loanTypes"
+                                [value]="loanType"
+                                >{{loanType}}</ion-select-option
+                            >
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Choose Payment Branch
+                        </ion-label>
+                        <ion-select
+                            interface="popover"
+                            type="text"
+                            formControlName="paymentBranch"
+                        >
+                            <ion-select-option
+                                *ngFor="let branch of branches"
+                                [value]="branch.BranchName"
+                                >{{branch.BranchName}}</ion-select-option
+                            >
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Account Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="bankAccountNumber"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Choose altenate Payment Branch
+                        </ion-label>
+                        <ion-select
+                            interface="popover"
+                            type="text"
+                            formControlName="paymentBranchAlt"
+                        >
+                            <ion-select-option
+                                *ngFor="let branch of branches"
+                                [value]="branch.BranchName"
+                                >{{branch.BranchName}}</ion-select-option
+                            >
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Choose altenate Payment Mode
+                        </ion-label>
+                        <ion-select
+                            interface="popover"
+                            type="text"
+                            formControlName="paymentMethodAlt"
+                        >
+                            <ion-select-option
+                                *ngFor="let paymentMethod of paymentMethods"
+                                [value]="paymentMethod.PaymentMethodName"
+                                >{{paymentMethod.PaymentMethodName}}</ion-select-option
+                            >
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Altenate Payment Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="paymobileNumberAlt"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Altenate Account Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="bankAccountNumberAlt"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Primary Contact Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="contactNumber"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Mandate Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="mandatenumber"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Second Mandate Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="mandatenumber2"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Loan Advance Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="loanadvancenumber"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Authority Note Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="authoritynote"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            ID Card Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="idcard"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            TIN Number
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="tinNumber"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Who does the deal belong to?
+                        </ion-label>
+                        <ion-select
+                            interface="popover"
+                            type="text"
+                            formControlName="DealDPCode"
+                        >
+                            <ion-select-option
+                                *ngFor="let teamMember of teamMembers"
+                                [value]="teamMember.Code"
+                                >{{teamMember.Name}}</ion-select-option
+                            >
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Who took the selfie?
+                        </ion-label>
+                        <ion-select
+                            interface="popover"
+                            type="text"
+                            formControlName="selfieDPCode"
+                        >
+                            <ion-select-option
+                                *ngFor="let teamMember of teamMembers"
+                                [value]="teamMember.Code"
+                                >{{teamMember.Name}}</ion-select-option
+                            >
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Afoordability
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="affordability"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Selfie Token
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="selfieToken"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Comments
+                        </ion-label>
+                        <ion-textarea
+                            type="text"
+                            formControlName="comments"
+                        ></ion-textarea>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label [position]="'stacked'">
+                            Payment Name
+                        </ion-label>
+                        <ion-input
+                            type="text"
+                            formControlName="PaymentName"
+                        ></ion-input>
+                    </ion-item>
+                    <ion-row>
+                        <ion-col>
+                            <app-image-upload></app-image-upload>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col [sizeMd]="6" [offsetMd]="3">
+                            <ion-button
+                                type="submit"
+                                [disabled]="requestLoanForm.invalid && !isValid"
+                                [expand]="'full'"
+                                >Post Loan</ion-button
+                            >
+                        </ion-col>
+                    </ion-row>
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

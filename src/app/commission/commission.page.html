@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar [color]="'primary'">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Commission</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col [sizeMd]="4" [offsetMd]="4" [sizeLg]="12" [offsetLg]="0">
+                <ion-card>
+                    <ion-card-header>
+                        Commission: {{commissionBalance}}
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-button
+                            [disabled]="commissionBalance < 1"
+                            (click)="openWithdrawalForm()"
+                            >Withdraw Funds</ion-button
+                        >
+                        <form
+                            *ngIf="withdrawalForm"
+                            [formGroup]="commissionForm"
+                            (submit)="enterWithdrawalAmount(commissionForm)"
+                        >
+                            <ion-item>
+                                <ion-label [position]="'stacked'"
+                                    >Enter Withdrawal Amount</ion-label
+                                >
+                                <ion-input
+                                    formControlName="amount"
+                                    type="number"
+                                    min="1"
+                                ></ion-input>
+                            </ion-item>
+                            <ion-button
+                                type="submit"
+                                [disabled]="commissionForm.invalid"
+                                >Process</ion-button
+                            >
+                        </form>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

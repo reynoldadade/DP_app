@@ -1,0 +1,31 @@
+<ion-grid>
+    <ion-row *ngFor="let uploadFile of uploadFiles">
+        <ion-col [sizeMd]="8" [offsetMd]="2" class="ion-float-center">
+            <ion-item>
+                <div class="container" *ngIf="uploadFile.filePath">
+                    <img [src]="uploadFile.filePath | sanitizer" />
+                    <button
+                        class="btn"
+                        (change)="removeImage(uploadFile.ImageType)"
+                    >
+                        X
+                    </button>
+                </div>
+            </ion-item>
+            <ion-item>
+                <ion-label [position]="'stacked'">
+                    Upload/Browse for {{ uploadFile.name }}
+                </ion-label>
+                <ion-input
+                    type="file"
+                    accept="image/*"
+                    (change)="
+                        getImage(uploadFile.ImageType, $event);
+                        sendThatFormIsValid()
+                    "
+                    [attr.id]="uploadFile.ImageType"
+                ></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</ion-grid>

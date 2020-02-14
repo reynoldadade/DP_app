@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <!--<ion-title>Total Amount</ion-title>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col [sizeMd]="4" [offsetMd]="4">
+        <ion-card>
+          <ion-card-header class="ion-text-center" [color]="'primary'">Calculate Loan Amount</ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="amountCalculatorForm" (submit)="calculateAmount(amountCalculatorForm)">
+              <ion-item>
+                <ion-label [position]="'stacked'">
+                  Deduction
+                </ion-label>
+                <ion-input type="number" [formControlName]="'deduction'"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">
+                  Tenor
+                </ion-label>
+                <ion-select [interface]="'action-sheet'" [formControlName]="'tenor'">
+                  <ion-select-option *ngFor="let loanTenor of loanTenors" [value]="loanTenor">
+                    {{loanTenor}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-button [expand]="'block'" type="submit">Calculate</ion-button>
+              <ion-item class="ion-padding">
+                <ion-label>Amount</ion-label>
+                {{amount}}
+              </ion-item>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

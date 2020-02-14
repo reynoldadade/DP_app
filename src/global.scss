@@ -10,6 +10,7 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
+
 @import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -24,3 +25,28 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+@import "./theme/variables.scss";
+
+
+ion-button{
+  text-transform: none;
+}
+ion-header{
+  z-index: 0;
+}
+
+.eligibility{
+  h2{
+    font-size: smaller;
+  }
+
+  .sentenceCase{
+    text-transform: lowercase;
+    &:first-letter{
+      text-transform: capitalize;
+    }
+  }
+
+}
+

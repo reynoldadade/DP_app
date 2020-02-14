@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title text-center>Request Confirmation</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col [sizeMd]="4" [offsetMd]="4" [sizeLg]="8" [offsetLg]="2">
+                <ion-card>
+                    <ion-card-content text-center>
+                        You are about to request for a commission of amount GH¢
+                        {{withdrawalAmount}},<br />
+                        which will be sent to mobile number {{phoneNumber}}.
+                        <br />
+                        Enter the PIN sent to your mobile number to confirm your
+                        identity and to validate this transaction
+                        <form
+                            [formGroup]="withdrawFundsForm"
+                            (submit)="withdrawFunds(withdrawFundsForm)"
+                        >
+                            <ion-item>
+                                <ion-label [position]="'stacked'"
+                                    >Enter PIN</ion-label
+                                >
+                                <ion-input
+                                    type="text"
+                                    [formControlName]="'otp'"
+                                    minlength="6"
+                                    required
+                                ></ion-input>
+                            </ion-item>
+                            <ion-button
+                                [expand]="'block'"
+                                type="submit"
+                                [disabled]="withdrawFundsForm.invalid"
+                                >Withdraw Funds</ion-button
+                            >
+                        </form>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

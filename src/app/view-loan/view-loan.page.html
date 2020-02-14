@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar [color]="'primary'">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Loan Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid [fixed]="true">
+    <ion-row>
+      <ion-col [sizeMd]="4" [offsetMd]="4">
+        <ion-card>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label [position]="'stacked'">Staff ID</ion-label>
+                {{data?.ClientRefId}}
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Staff Name</ion-label>
+                {{data?.ClientName}}
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Loan Amount</ion-label>
+                GH¢ {{data?.GrossAmount}}
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Loan Tenor</ion-label>
+                {{data?.Tenor}} months
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Net Amount</ion-label>
+                GH¢ {{data?.NetAmount}}
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Loan Type</ion-label>
+                {{data?.LoanType}}
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Payment Method</ion-label>
+                {{data?.PaymentMethod}}
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Branch</ion-label>
+                {{data?.Branch}}
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Posted By</ion-label>
+                {{data?.TLCode}}
+              </ion-item>
+              <ion-item>
+                <ion-label [position]="'stacked'">Deal DP</ion-label>
+                {{data?.Deal_DPCode}}
+              </ion-item>
+
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

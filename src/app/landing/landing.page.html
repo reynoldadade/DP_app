@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar [color]="'primary'">
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div style="--aspect-ratio: 16/9;">
+          <iframe
+            id="biFrame"
+            allowfullscreen
+            src="https://app.powerbi.com/view?r=eyJrIjoiNTg4NjE4YzAtN2U0ZC00OWMzLTg1NDgtZTRlZjQ4MTliNzg1IiwidCI6IjA1OGEyNGJlLTY1MjItNGY2Yi1iZjdmLWQ2YzNkYzMwZmI5NiIsImMiOjl9"
+          >
+          </iframe>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
