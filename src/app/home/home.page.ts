@@ -75,7 +75,7 @@ export class HomePage implements OnInit {
     getUserInfo() {
         this.sharedService.getUserInfo().subscribe(response => {
             sessionStorage.setItem('userInfo', JSON.stringify(response));
-            // console.log(response, 'userinfo');
+            console.log(response, 'userinfo');
         });
     }
 }

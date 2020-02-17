@@ -80,12 +80,10 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.imageUploadService.startImageUpload.subscribe((id: string) => {
-            // if (id) {
-            //     // console.log('event recieved');
-            //     this.uploadImagesToServerBulk(id, this.uploadFiles);
-            // }
-
-            this.uploadImagesToServerBulk(id, this.uploadFiles);
+            if (id) {
+                // console.log('event recieved');
+                this.uploadImagesToServerBulk(id, this.uploadFiles);
+            }
         });
     }
 
@@ -103,18 +101,14 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
         // console.log(this.uploadFiles, 'array');
     }
 
+    //  checking to see that all my required images are available
     sendThatFormIsValid() {
-        // const everyFieldisUploaded = (imageObject: IuploadImageForm) =>
-        //   imageObject.filePath && imageObject.required;
         this.imageUploadService.allRequiredImagesUploaded.emit(
             this.formisValid(this.uploadFiles)
         );
     }
 
     formisValid(obj: Array<IuploadImageForm>): boolean {
-        // if (obj[0].required && obj[0].filePath) {
-        //   return true;
-        // }
         return (
             obj[0].required &&
             obj[0].filePath &&
@@ -132,6 +126,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
 
     removeImage(id: string) {
         this.uploadFiles[this.findObjectFromArray(id)].filePath = null;
+        this.uploadFiles[this.findObjectFromArray(id)].file = null;
     }
 
     uploadImagesToServer(id: string) {
@@ -153,7 +148,6 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
         const selectedImages = this.uploadFiles.filter(item => item.filePath);
         sessionStorage.setItem('imageResponse', JSON.stringify(selectedImages));
         this.postLoanService.loading.dismiss();
-        console.log('image upload complete');
         this.router.navigate(['loan-posting-confirmation']);
     }
 
@@ -174,16 +168,15 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
                         );
                         break;
                     case HttpEventType.Response:
-                        console.log(event.body, 'response');
+                        this.router.navigate(['loan-posting-confirmation']);
+                    // console.log(event.body, 'response');
                 }
             },
             () => this.shared.presentToast('Failed to upload')
         );
         const selectedImages = this.uploadFiles.filter(item => item.filePath);
         sessionStorage.setItem('imageResponse', JSON.stringify(selectedImages));
-        // this.postLoanService.loading.dismiss();
-        // console.log('image upload complete');
-        // this.router.navigate(['loan-posting-confirmation']);
+        this.postLoanService.loading.dismiss();
     }
 
     filterForContentToUpload(filestoUpload: Array<IuploadImageForm>) {

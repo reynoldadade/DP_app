@@ -34,6 +34,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        console.log(JSON.parse(sessionStorage.getItem('userInfo')));
         // check replacement balance
         // this.checkForReplacementBalance();
         // get eligiblity Data
@@ -49,8 +50,6 @@ export class PostLoanPage implements OnInit, OnDestroy {
         }
 
         this.activeLoans = JSON.parse(sessionStorage.getItem('activeloans'));
-        console.log(this.eligibilityData);
-
         this.getPaymentMethods();
         this.getBranches();
 
@@ -130,24 +129,18 @@ export class PostLoanPage implements OnInit, OnDestroy {
     }
 
     postLoan(form: FormGroup) {
-        // this.postLoanService.requestLoan(form.value).subscribe(response => {
-        //     const responseData = JSON.parse(response.Data);
-        //     sessionStorage.setItem('loanRequestResponse', response.Data);
-        //     this.postLoanService.presentLoadingWithOptions('Posting Loan');
-        //     if (this.replacementLoanArray.length > 0) {
-        //         this.compileLoan(this.replacementLoanArray, responseData.id);
-        //     }
-        //     this.imageUploadService.startImageUpload.emit(responseData.Id);
-        // });
-        this.imageUploadService.startImageUpload.emit('718');
+        this.postLoanService.requestLoan(form.value).subscribe(response => {
+            const responseData = JSON.parse(response.Data);
+            sessionStorage.setItem('loanRequestResponse', response.Data);
+            console.log(response);
+            this.postLoanService.presentLoadingWithOptions('Posting Loan');
+            if (this.replacementLoanArray.length > 0) {
+                this.compileLoan(this.replacementLoanArray, responseData.id);
+            }
+            this.imageUploadService.startImageUpload.emit(responseData.Id);
+        });
+        // this.imageUploadService.startImageUpload.emit('718');
     }
-    // testLoan() {
-    //     //   this.postLoanService.requestLoan(form.value).subscribe(response => {
-    //     //     console.log(response);
-    //     //     this.imageUploadService.startImageUpload.emit('this id');
-    //     //   });
-    //     this.imageUploadService.startImageUpload.emit('this id');
-    // }
 
     checkForReplacementBalance() {
         const replacementLoansFromNav: Array<IActiveLoans> = this

@@ -1,35 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Loan Details</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Loan Details</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col [sizeMd]="8" [offsetMd]="2">
-        <ion-list>
-          <ion-item>
-            Request Id : {{loanRequestResponse?.Id}}
-          </ion-item>
-          <ion-item>
-            Name : {{loanRequestResponse?.ClientName}}
-          </ion-item>
-          <ion-item>
-            Gross : {{loanRequestResponse?.GrossAmount}}
-          </ion-item>
-          <ion-item>
-            Net : {{loanRequestResponse?.NetAmount}}
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col [sizeMd]="8" [offsetMd]="2">
-        <ion-item *ngFor="let image of imageResponse">
-          {{image?.ImageType}} | {{image?.uploaded}}
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid>
+        <ion-row>
+            <ion-col [sizeMd]="8" [offsetMd]="2">
+                <ion-list>
+                    <ion-item>
+                        Request Id : {{loanRequestResponse?.Id}}
+                    </ion-item>
+                    <ion-item>
+                        Name : {{loanRequestResponse?.ClientName}}
+                    </ion-item>
+                    <ion-item>
+                        Gross : {{loanRequestResponse?.GrossAmount}}
+                    </ion-item>
+                    <ion-item>
+                        Net : {{loanRequestResponse?.NetAmount}}
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
