@@ -78,10 +78,10 @@ export class SharedService {
         sessionStorage.setItem('rToken', data.refresh_token);
     }
 
-    getRefreshToken(rToken): Observable<any> {
+    getRefreshToken(): Observable<any> {
         const body = {
             grant_type: 'refresh_token',
-            refresh_token: rToken,
+            refresh_token: sessionStorage.getItem('rToken'),
         };
         return this.http.post(`${environment.filmsApi}/token`, body);
     }

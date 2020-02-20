@@ -147,7 +147,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
         });
         const selectedImages = this.uploadFiles.filter(item => item.filePath);
         sessionStorage.setItem('imageResponse', JSON.stringify(selectedImages));
-        this.postLoanService.loading.dismiss();
+        // this.postLoanService.loading.dismiss();
         this.router.navigate(['loan-posting-confirmation']);
     }
 
@@ -156,7 +156,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
         filestoUpload: Array<IuploadImageForm>
     ) {
         const results = this.filterForContentToUpload(filestoUpload);
-        console.log(results, 'filter results');
+        //  console.log(results, 'filter results');
         this.imageUploadService.attachImage(id, results).subscribe(
             event => {
                 switch (event.type) {
@@ -168,15 +168,20 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
                         );
                         break;
                     case HttpEventType.Response:
+                        console.log(HttpEventType.Response, 'httpResponse');
+                        this.shared.presentToast('Upload Successful');
                         this.router.navigate(['loan-posting-confirmation']);
-                    // console.log(event.body, 'response');
+                        this.postLoanService.dismiss();
                 }
             },
-            () => this.shared.presentToast('Failed to upload')
+            () => {
+                this.shared.presentToast('Failed to upload');
+                this.postLoanService.dismiss();
+            }
         );
         const selectedImages = this.uploadFiles.filter(item => item.filePath);
         sessionStorage.setItem('imageResponse', JSON.stringify(selectedImages));
-        this.postLoanService.loading.dismiss();
+        // this.postLoanService.loading.dismiss();
     }
 
     filterForContentToUpload(filestoUpload: Array<IuploadImageForm>) {

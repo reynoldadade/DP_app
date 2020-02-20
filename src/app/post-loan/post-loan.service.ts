@@ -10,6 +10,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class PostLoanService {
     loading: any;
+    isLoading = false;
     constructor(
         private http: HttpClient,
         private loadingController: LoadingController
@@ -36,6 +37,30 @@ export class PostLoanService {
             translucent: true,
         });
         return await this.loading.present();
+    }
+
+    async present() {
+        this.isLoading = true;
+        return await this.loadingController
+            .create({
+                translucent: true,
+                message: 'Posting Loan',
+            })
+            .then(a => {
+                a.present().then(() => {
+                    console.log('presented');
+                    if (!this.isLoading) {
+                        a.dismiss().then(() => console.log('abort presenting'));
+                    }
+                });
+            });
+    }
+
+    async dismiss() {
+        this.isLoading = false;
+        return await this.loadingController
+            .dismiss()
+            .then(() => console.log('dismissed'));
     }
 
     configureNetAmount(loanRequests): Observable<any> {

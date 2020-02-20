@@ -26,6 +26,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
     activeLoans: Array<IActiveLoans>;
     loanTenors = [3, 6, 12, 18, 24, 36, 48, 54];
     teamMembers: Array<ITeam>;
+    userInfo;
 
     constructor(
         private fb: FormBuilder,
@@ -34,7 +35,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        console.log(JSON.parse(sessionStorage.getItem('userInfo')));
+        this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
         // check replacement balance
         // this.checkForReplacementBalance();
         // get eligiblity Data
@@ -103,6 +104,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
             PaymentName: [''],
             paymobileNumberAlt: [''],
             comments: [''],
+            createdBy: [this.userInfo[6].Value],
             selfieToken: ['', Validators.required],
         });
     }
@@ -132,8 +134,9 @@ export class PostLoanPage implements OnInit, OnDestroy {
         this.postLoanService.requestLoan(form.value).subscribe(response => {
             const responseData = JSON.parse(response.Data);
             sessionStorage.setItem('loanRequestResponse', response.Data);
-            console.log(response);
-            this.postLoanService.presentLoadingWithOptions('Posting Loan');
+            console.log(response, 'loan posting response');
+            // this.postLoanService.presentLoadingWithOptions('Posting Loan');
+            this.postLoanService.present();
             if (this.replacementLoanArray.length > 0) {
                 this.compileLoan(this.replacementLoanArray, responseData.id);
             }

@@ -6,10 +6,9 @@ import {
     HttpHandler,
     HttpInterceptor,
     HttpRequest,
-    HttpResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { ErrorDialogService } from './error-dialog.service';
 import { Router } from '@angular/router';
 import { SharedService } from '../shared/shared.service';
@@ -43,7 +42,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
             if (timeRemaining > 0 && timeRemaining <= 300000) {
                 console.log('almost time');
-                this.sharedService.getRefreshToken(rToken).subscribe(
+                this.sharedService.getRefreshToken().subscribe(
                     response => {
                         this.sharedService.saveTokenInfo(response);
                         refreshToken = response;
@@ -54,6 +53,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     },
                     () => {
                         timeRemaining = 0;
+                        sessionStorage.clear();
                         this.router.navigate(['home']);
                     }
                 );
@@ -83,12 +83,6 @@ export class TokenInterceptor implements HttpInterceptor {
             });
         }
         return next.handle(request).pipe(
-            // map((event: HttpEvent<any>) => {
-            //     if (event instanceof HttpResponse) {
-            //         console.log('event--->>>', event);
-            //     }
-            //     return event;
-            // }),
             catchError((error: HttpErrorResponse) => {
                 if (error.status === 401) {
                     this.router.navigate(['home']);
