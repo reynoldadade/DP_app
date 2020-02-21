@@ -138,7 +138,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
             // this.postLoanService.presentLoadingWithOptions('Posting Loan');
             this.postLoanService.present();
             if (this.replacementLoanArray.length > 0) {
-                this.compileLoan(this.replacementLoanArray, responseData.id);
+                this.compileLoan(this.replacementLoanArray, responseData.Id);
             }
             this.imageUploadService.startImageUpload.emit(responseData.Id);
         });
@@ -170,7 +170,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
         console.log(this.replacementLoanArray);
     }
 
-    compileLoan(loan: Array<IActiveLoans>, id: number) {
+    compileLoan(loan: Array<IActiveLoans>, id: any) {
         const replacementLoansChosen = [] as Array<IReplacement>;
         const loantoReplace = {} as IReplacement;
         loan.forEach(element => {
@@ -183,7 +183,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
         this.postLoanService
             .configureNetAmount(replacementLoansChosen)
             .subscribe(response => {
-                console.log(response);
+                console.log(response, 'replacement chosen');
             });
     }
 
