@@ -15,6 +15,12 @@
             <ion-item>
                 <ion-label [position]="'stacked'">
                     Upload/Browse for {{ uploadFile.name }}
+                    <ion-text
+                        *ngIf="uploadFile.required"
+                        ion-text
+                        color="danger"
+                        >*</ion-text
+                    >
                 </ion-label>
                 <ion-input
                     type="file"
