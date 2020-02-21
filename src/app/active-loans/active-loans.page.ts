@@ -105,6 +105,8 @@ export class ActiveLoansPage implements OnInit {
                             'eligibilityData',
                             response.Data
                         );
+
+                        console.log(response.Data);
                         this.callActiveLoansService(data);
                     } else {
                         this.spin = false;

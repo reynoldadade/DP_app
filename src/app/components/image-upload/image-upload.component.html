@@ -20,7 +20,7 @@
                     type="file"
                     accept="image/*"
                     (change)="
-                        getImage(uploadFile.ImageType, $event.target.files);
+                        getImage(uploadFile.ImageType, $event);
                         sendThatFormIsValid()
                     "
                     [attr.id]="uploadFile.ImageType"

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { PostLoanService } from 'src/app/post-loan/post-loan.service';
 import { SharedService } from 'src/app/shared/shared.service';
 import { HttpEventType } from '@angular/common/http';
+import { element } from 'protractor';
 @Component({
     selector: 'app-image-upload',
     templateUrl: './image-upload.component.html',
@@ -87,12 +88,26 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
         });
     }
 
-    getImage(id: string, files: FileList) {
+    getImage(id: string, event) {
+        const files: FileList = event.target.files;
         if (files) {
-            console.log(files.item(0));
-            const output = URL.createObjectURL(files.item(0));
-            this.uploadFiles[this.findObjectFromArray(id)].file = files.item(0);
-            this.uploadFiles[this.findObjectFromArray(id)].filePath = output;
+            console.log(files);
+
+            switch (files.item(0).size > 1024 * 1024 * 2) {
+                case true:
+                    this.shared.presentToast('File is larger than 2MB');
+                    event.target.value = '';
+                    break;
+                default:
+                    const output = URL.createObjectURL(files.item(0));
+                    this.uploadFiles[
+                        this.findObjectFromArray(id)
+                    ].file = files.item(0);
+                    this.uploadFiles[
+                        this.findObjectFromArray(id)
+                    ].filePath = output;
+                    break;
+            }
         } else {
             this.uploadFiles[this.findObjectFromArray(id)].filePath = null;
             this.uploadFiles[this.findObjectFromArray(id)].file = null;

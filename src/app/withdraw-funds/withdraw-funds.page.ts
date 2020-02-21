@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { WithdrawFundsService } from './withdraw-funds.service';
 import { SharedService } from '../shared/shared.service';
 import { Router } from '@angular/router';
+import { INetworkProviders } from './network.model';
 
 @Component({
     selector: 'app-withdraw-funds',
@@ -13,6 +14,7 @@ export class WithdrawFundsPage implements OnInit {
     withdrawFundsForm: FormGroup;
     withdrawalAmount: string;
     phoneNumber: string;
+    PROVIDERS: Array<INetworkProviders>;
     constructor(
         private fb: FormBuilder,
         private withDrawFundsService: WithdrawFundsService,
@@ -21,6 +23,7 @@ export class WithdrawFundsPage implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.getNetworkProviders();
         this.withdrawalAmount = sessionStorage.getItem('withdrawalAmount');
         this.phoneNumber = this.shared.getPhoneNumber();
         this.withdrawFundsForm = this.fb.group({
@@ -28,6 +31,7 @@ export class WithdrawFundsPage implements OnInit {
                 this.withdrawalAmount,
                 Validators.compose([Validators.required]),
             ],
+            networkProvider: ['', Validators.required],
             otp: [
                 '',
                 Validators.compose([
@@ -45,6 +49,17 @@ export class WithdrawFundsPage implements OnInit {
                 this.router.navigate(['confirm-commission-withdrawal']);
             },
             error => this.shared.presentToast('Withdrawal Failed')
+        );
+    }
+
+    getNetworkProviders() {
+        this.withDrawFundsService.getNetworkProviders().subscribe(
+            response => {
+                this.PROVIDERS = response;
+            },
+            err => {
+                console.log(err);
+            }
         );
     }
 }

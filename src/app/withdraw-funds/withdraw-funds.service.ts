@@ -21,4 +21,10 @@ export class WithdrawFundsService {
             )
             .pipe(throttleTime(10000));
     }
+
+    getNetworkProviders(): Observable<any> {
+        return this.http.get(
+            `${environment.filmsApi}/dalexpaddies/paymentNetwork`
+        );
+    }
 }

@@ -22,6 +22,22 @@
                         >
                             <ion-item>
                                 <ion-label [position]="'stacked'"
+                                    >NETWORK</ion-label
+                                >
+                                <ion-select
+                                    [formControlName]="'networkProvider'"
+                                    required
+                                >
+                                    <ion-select-option
+                                        *ngFor="let networkProvider of PROVIDERS"
+                                        [value]="networkProvider.Code"
+                                    >
+                                        {{networkProvider.Name}}
+                                    </ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label [position]="'stacked'"
                                     >Enter PIN</ion-label
                                 >
                                 <ion-input
