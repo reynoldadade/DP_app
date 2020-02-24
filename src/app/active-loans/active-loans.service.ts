@@ -12,10 +12,13 @@ export class ActiveLoansService {
     constructor(private http: HttpClient) {}
 
     getActiveLoans(data: any): Observable<any> {
-        const httpParams = new HttpParams().set('id', data.id.toUpperCase());
+        const httpParams = new HttpParams().set(
+            'employeeId',
+            data.id.trim().toUpperCase()
+        );
         const options = { params: httpParams };
         return this.http.post(
-            `${environment.filmsApi}/mobile/getNavStaffLoansBulk`,
+            `${environment.filmsApi}/dalexpaddies/getNavStaffLoansBulk`,
             null,
             options
         );
