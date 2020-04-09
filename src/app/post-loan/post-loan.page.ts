@@ -57,7 +57,13 @@ export class PostLoanPage implements OnInit, OnDestroy {
 
         this.requestLoanForm = this.fb.group({
             staffid: [this.eligibilityData.EmployeeID, Validators.required],
-            grossAmount: [0, Validators.required],
+            grossAmount: [
+                500,
+                Validators.compose([
+                    Validators.required,
+                    Validators.min(this.whichIsbigger()),
+                ]),
+            ],
             netAmount: ['', Validators.required],
             existingBalance: [this.replacementBalance, Validators.required],
             tenor: [
@@ -129,6 +135,10 @@ export class PostLoanPage implements OnInit, OnDestroy {
                 console.log(err);
             }
         );
+    }
+
+    whichIsbigger() {
+        return Math.max(this.replacementBalance + 500, 500);
     }
 
     postLoan(form: FormGroup) {
