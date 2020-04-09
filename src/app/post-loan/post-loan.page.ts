@@ -7,6 +7,7 @@ import { PostLoanService } from './post-loan.service';
 import { IReplacement, IActiveLoans } from '../active-loans/active-loans.model';
 import { IEligibiity as IEligibility } from '../active-loans/eligibility.model';
 import { ITeam } from './teamMembers.model';
+import { throttleTime } from 'rxjs/operators';
 
 @Component({
     selector: 'app-post-loan',
@@ -20,7 +21,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
     branches: Array<Branches>;
     previousBalance: number;
     isValid: boolean;
-    replacementBalance: number;
+    replacementBalance = 0;
     replacementLoanArray = [] as Array<IActiveLoans>;
     eligibilityData: IEligibility;
     activeLoans: Array<IActiveLoans>;
@@ -111,20 +112,20 @@ export class PostLoanPage implements OnInit, OnDestroy {
 
     getPaymentMethods() {
         this.postLoanService.getPaymentMethods().subscribe(
-            response => {
+            (response) => {
                 this.paymentMethods = response;
             },
-            err => {
+            (err) => {
                 console.log(err);
             }
         );
     }
     getBranches() {
         this.postLoanService.getBranches().subscribe(
-            response => {
+            (response) => {
                 this.branches = response;
             },
-            err => {
+            (err) => {
                 console.log(err);
             }
         );
@@ -133,21 +134,24 @@ export class PostLoanPage implements OnInit, OnDestroy {
     postLoan(form: FormGroup) {
         const netAmount = form.value.grossAmount - this.replacementBalance;
         sessionStorage.setItem('netAmount', netAmount.toString());
-        this.postLoanService.requestLoan(form.value).subscribe(response => {
-            const responseData = JSON.parse(response.Data);
-            sessionStorage.setItem('loanRequestResponse', response.Data);
-            console.log(response, 'loan posting response');
-            // this.postLoanService.presentLoadingWithOptions('Posting Loan');
-            this.postLoanService.present();
-            if (this.replacementLoanArray.length > 0) {
-                this.compileLoan(
-                    this.replacementLoanArray,
-                    responseData.Id,
-                    netAmount
-                );
-            }
-            this.imageUploadService.startImageUpload.emit(responseData.Id);
-        });
+        this.postLoanService
+            .requestLoan(form.value)
+            .pipe(throttleTime(10000))
+            .subscribe((response) => {
+                const responseData = JSON.parse(response.Data);
+                sessionStorage.setItem('loanRequestResponse', response.Data);
+                console.log(response, 'loan posting response');
+                // this.postLoanService.presentLoadingWithOptions('Posting Loan');
+                this.postLoanService.present();
+                if (this.replacementLoanArray.length > 0) {
+                    this.compileLoan(
+                        this.replacementLoanArray,
+                        responseData.Id,
+                        netAmount
+                    );
+                }
+                this.imageUploadService.startImageUpload.emit(responseData.Id);
+            });
         // this.imageUploadService.startImageUpload.emit('718');
     }
 
@@ -156,12 +160,12 @@ export class PostLoanPage implements OnInit, OnDestroy {
             .replacementLoanArray;
         if (replacementLoansFromNav.length > 0) {
             this.replacementBalance = replacementLoansFromNav
-                .map(loans => loans.ReplacementAmountDue)
+                .map((loans) => loans.ReplacementAmountDue)
                 .reduce((prev, current) => prev + current, 0);
         } else {
             this.replacementBalance = 0;
         }
-        console.log(this.replacementBalance);
+        // console.log(this.replacementBalance);
     }
 
     getLoan(loan: IActiveLoans, e) {
@@ -179,7 +183,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
     compileLoan(loan: Array<IActiveLoans>, id: any, netAmount: number) {
         const replacementLoansChosen = [] as Array<IReplacement>;
         const loantoReplace = {} as IReplacement;
-        loan.forEach(element => {
+        loan.forEach((element) => {
             loantoReplace.Id = id;
             loantoReplace.NavLoanId = element.Loan_No;
             loantoReplace.NetAmount = netAmount;
@@ -188,14 +192,14 @@ export class PostLoanPage implements OnInit, OnDestroy {
         console.log(replacementLoansChosen);
         this.postLoanService
             .configureNetAmount(replacementLoansChosen)
-            .subscribe(response => {
+            .subscribe((response) => {
                 console.log(response, 'replacement chosen');
             });
     }
 
     // get team members
     getTeamMembers() {
-        this.postLoanService.getTeamMembers().subscribe(response => {
+        this.postLoanService.getTeamMembers().subscribe((response) => {
             this.teamMembers = response;
             // console.log(this.teamMembers, 'team members');
         });

@@ -17,9 +17,8 @@ export class ActiveLoansService {
             data.id.trim().toUpperCase()
         );
         const options = { params: httpParams };
-        return this.http.post(
+        return this.http.get(
             `${environment.filmsApi}/dalexpaddies/getNavStaffLoansBulk`,
-            null,
             options
         );
     }

@@ -46,14 +46,16 @@ export class ActiveLoansPage implements OnInit {
         // this.spin = true;
         this.activeloansService.getActiveLoans(data).subscribe(
             response => {
-                const loanArray: [] = JSON.parse(response.Data);
+                console.log(response, 'activeloans');
+                let loanArray: [] = response;
                 console.log(loanArray);
-                if (loanArray.length === 0) {
+                if (!loanArray || loanArray.length < 1) {
+                    loanArray = [];
                     // console.log('id not found');
                     this.shared.presentToast('Loan not found for this ID');
                 }
                 this.activeLoans = loanArray;
-                sessionStorage.setItem('activeloans', response.Data);
+                sessionStorage.setItem('activeloans', JSON.stringify(response));
                 this.spin = false;
                 this.loanButtonText = 'Post a new/replacement loan';
                 // console.log(response.Data);

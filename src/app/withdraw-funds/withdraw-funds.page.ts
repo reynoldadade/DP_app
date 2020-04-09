@@ -4,6 +4,7 @@ import { WithdrawFundsService } from './withdraw-funds.service';
 import { SharedService } from '../shared/shared.service';
 import { Router } from '@angular/router';
 import { INetworkProviders } from './network.model';
+import { throttleTime } from 'rxjs/operators';
 
 @Component({
     selector: 'app-withdraw-funds',
@@ -43,21 +44,27 @@ export class WithdrawFundsPage implements OnInit {
     }
 
     withdrawFunds(form: FormGroup) {
-        this.withDrawFundsService.withdrawFunds(form.value).subscribe(
-            response => {
-                sessionStorage.setItem('withdrawalResponse', response.Message);
-                this.router.navigate(['confirm-commission-withdrawal']);
-            },
-            error => this.shared.presentToast('Withdrawal Failed')
-        );
+        this.withDrawFundsService
+            .withdrawFunds(form.value)
+            .pipe(throttleTime(15000))
+            .subscribe(
+                (response) => {
+                    sessionStorage.setItem(
+                        'withdrawalResponse',
+                        response.Message
+                    );
+                    this.router.navigate(['confirm-commission-withdrawal']);
+                },
+                (error) => this.shared.presentToast('Withdrawal Failed')
+            );
     }
 
     getNetworkProviders() {
         this.withDrawFundsService.getNetworkProviders().subscribe(
-            response => {
+            (response) => {
                 this.PROVIDERS = response;
             },
-            err => {
+            (err) => {
                 console.log(err);
             }
         );
