@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SharedService} from '../shared/shared.service';
-import {LoanHistoryService} from './loan-history.service';
-import {LoanInterface, LoanSummary} from './loanHistory.interface';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SharedService } from '../shared/shared.service';
+import { LoanHistoryService } from './loan-history.service';
+import { LoanInterface, LoanSummary } from './loanHistory.interface';
 
 @Component({
-  selector: 'app-loan-history',
-  templateUrl: './loan-history.page.html',
-  styleUrls: ['./loan-history.page.scss'],
+    selector: 'app-loan-history',
+    templateUrl: './loan-history.page.html',
+    styleUrls: ['./loan-history.page.scss'],
 })
 export class LoanHistoryPage implements OnInit {
     dealsForm: FormGroup;
@@ -18,48 +18,47 @@ export class LoanHistoryPage implements OnInit {
     loanSummary: LoanSummary = {
         TotalCommission: 0,
         TotalLoans: 0,
-        TotalOverider: 0
+        TotalOverider: 0,
     };
-    found =  false;
+    found = false;
     spinner = false;
 
-    constructor(private fb: FormBuilder, private sharedService: SharedService, private loanHistoryService: LoanHistoryService) {
-    }
+    constructor(
+        private fb: FormBuilder,
+        private sharedService: SharedService,
+        private loanHistoryService: LoanHistoryService
+    ) {}
 
     ngOnInit() {
-        this.user = sessionStorage.getItem('userCode');
-        if (!this.user) {
-            this.user = '56-0001-00004';
-        }
-        if (this.user) {
-            this.dealsForm = this.fb.group({
-                start: [this.today, Validators.compose([Validators.required])],
-                end: [this.today, Validators.required],
-                type: ['DP'],
-                usercode: [this.user]
-            });
-        }
+        console.log(this.today, 'today');
+        this.dealsForm = this.fb.group({
+            startDate: [this.today, Validators.compose([Validators.required])],
+            endDate: [this.today, Validators.required],
+        });
     }
-
 
     getPaidDeals(form: FormGroup) {
         this.found = false;
         this.spinner = true;
-        this.loanHistoryService.getDeals(form.value).subscribe((response) => {
-            this.spinner = false;
-            if (response.Status === 'fail') {
-                this.sharedService.presentToast(response.Message);
-            } else {
-                this.found = true;
-                const deals = JSON.parse(response.Data);
-                this.deals = deals.ActiveLoans;
-                this.loanSummary = deals.LoanSummary;
-                console.log(deals);
+        form.value.startDate = new Date(form.value.startDate).toISOString();
+        form.value.endDate = new Date(form.value.endDate).toISOString();
+        this.loanHistoryService.getDeals(form.value).subscribe(
+            (response) => {
+                this.spinner = false;
+                console.log(response);
+                if (response.length < 1) {
+                    this.sharedService.presentToast(
+                        'No deals found during this period'
+                    );
+                } else {
+                    this.found = true;
+                    this.deals = response.reverse();
+                }
+            },
+            () => {
+                this.spinner = false;
+                this.sharedService.presentToast('Network Failure');
             }
-        }, () => {
-            this.spinner = false;
-            this.sharedService.presentToast('Network Failure');
-        });
+        );
     }
-
 }
