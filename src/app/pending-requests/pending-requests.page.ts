@@ -28,8 +28,8 @@ export class PendingRequestsPage implements OnInit {
 
     ngOnInit() {
         this.dealsForm = this.fb.group({
-            startDate: ['', Validators.compose([Validators.required])],
-            endDate: ['', Validators.required],
+            startDate: [this.today, Validators.compose([Validators.required])],
+            endDate: [this.today, Validators.required],
         });
     }
 
@@ -52,12 +52,12 @@ export class PendingRequestsPage implements OnInit {
                     this.deals = response.reverse();
                     // console.log(deals);
                 }
-                form.reset();
+                // form.reset();
             },
             () => {
                 this.spinner = false;
                 this.sharedService.presentToast('Network Failure');
-                form.reset();
+                // form.reset();
             }
         );
     }
