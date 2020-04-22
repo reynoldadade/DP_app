@@ -16,6 +16,7 @@ export class WithdrawFundsPage implements OnInit {
     withdrawalAmount: string;
     phoneNumber: string;
     PROVIDERS: Array<INetworkProviders>;
+    spinner = false;
     constructor(
         private fb: FormBuilder,
         private withDrawFundsService: WithdrawFundsService,
@@ -44,6 +45,7 @@ export class WithdrawFundsPage implements OnInit {
     }
 
     withdrawFunds(form: FormGroup) {
+        this.spinner = true;
         this.withDrawFundsService
             .withdrawFunds(form.value)
             .pipe(throttleTime(15000))
@@ -53,9 +55,13 @@ export class WithdrawFundsPage implements OnInit {
                         'withdrawalResponse',
                         response.Message
                     );
+                    this.spinner = false;
                     this.router.navigate(['confirm-commission-withdrawal']);
                 },
-                (error) => this.shared.presentToast('Withdrawal Failed')
+                (error) => {
+                    this.shared.presentToast('Withdrawal Failed');
+                    this.spinner = false;
+                }
             );
     }
 

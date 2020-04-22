@@ -51,8 +51,9 @@
                                 [expand]="'block'"
                                 type="submit"
                                 [disabled]="withdrawFundsForm.invalid"
-                                >Withdraw Funds</ion-button
-                            >
+                                >Withdraw Funds
+                                <ion-spinner *ngIf="spinner"></ion-spinner
+                            ></ion-button>
                         </form>
                     </ion-card-content>
                 </ion-card>
