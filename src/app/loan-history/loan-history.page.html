@@ -54,7 +54,7 @@
         </ion-row>
         <div *ngIf="found">
             <ion-row>
-                <ion-col [sizeMd]="4" [offsetMd]="4">
+                <ion-col [sizeMd]="6" [offsetMd]="3">
                     <ion-card>
                         <ion-card-header>Commission Summary</ion-card-header>
                         <ion-card-content>
@@ -62,12 +62,16 @@
                                 Total Commission:
                                 GH¢{{loanSummary?.TotalCommission}}
                             </ion-item>
+                            <ion-item>
+                                Total number of loans:
+                                {{loanSummary?.TotalLoans}}
+                            </ion-item>
                         </ion-card-content>
                     </ion-card>
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col [sizeMd]="4" [offsetMd]="4">
+                <ion-col [sizeMd]="6" [offsetMd]="3">
                     <ion-list>
                         <ion-item
                             *ngFor="let deal of deals|idFilter:searchText"

@@ -53,6 +53,10 @@ export class LoanHistoryPage implements OnInit {
                 } else {
                     this.found = true;
                     this.deals = response.reverse();
+                    this.loanSummary.TotalCommission = this.getTotalCommission(
+                        this.deals
+                    );
+                    this.loanSummary.TotalLoans = this.deals.length;
                 }
             },
             () => {
@@ -60,5 +64,11 @@ export class LoanHistoryPage implements OnInit {
                 this.sharedService.presentToast('Network Failure');
             }
         );
+    }
+
+    getTotalCommission(data: LoanInterface[]) {
+        return data
+            .map((loan) => loan.Commission)
+            .reduce((prev, next) => prev + next);
     }
 }

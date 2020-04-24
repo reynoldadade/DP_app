@@ -45,7 +45,7 @@ export class WithdrawFundsPage implements OnInit {
     }
 
     withdrawFunds(form: FormGroup) {
-        this.shared.presentToast('Sending PIN....');
+        this.shared.presentToast('Sending request....');
         this.spinner = true;
         this.withDrawFundsService
             .withdrawFunds(form.value)
