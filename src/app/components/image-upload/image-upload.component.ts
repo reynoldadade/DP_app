@@ -31,12 +31,12 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
             name: 'Form A',
         },
         {
-            ImageType: 'MANDATE',
+            ImageType: 'APPOINT',
             file: null,
             filePath: null,
             required: false,
             uploaded: false,
-            name: 'Mandate Form',
+            name: 'Appointment Letter',
         },
         {
             ImageType: 'TRANSFER',
@@ -69,6 +69,14 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
             required: false,
             uploaded: false,
             name: 'Passport Picture',
+        },
+        {
+            ImageType: 'IDCARD',
+            file: null,
+            filePath: null,
+            required: false,
+            uploaded: false,
+            name: 'ID Card',
         },
     ];
 
@@ -133,7 +141,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
     }
 
     findObjectFromArray(id: string) {
-        const value = this.uploadFiles.findIndex(object => {
+        const value = this.uploadFiles.findIndex((object) => {
             return object.ImageType === id;
         });
         return value;
@@ -145,7 +153,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
     }
 
     uploadImagesToServer(id: string) {
-        this.uploadFiles.forEach(uploadFile => {
+        this.uploadFiles.forEach((uploadFile) => {
             if (uploadFile.filePath) {
                 const imageResponse = {
                     id,
@@ -154,13 +162,13 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
                 };
                 this.imageUploadService
                     .updateImage(id, imageResponse)
-                    .subscribe(response => {
+                    .subscribe((response) => {
                         console.log(response);
                         uploadFile.uploaded = response.Status;
                     });
             }
         });
-        const selectedImages = this.uploadFiles.filter(item => item.filePath);
+        const selectedImages = this.uploadFiles.filter((item) => item.filePath);
         sessionStorage.setItem('imageResponse', JSON.stringify(selectedImages));
         // this.postLoanService.loading.dismiss();
         this.router.navigate(['loan-posting-confirmation']);
@@ -173,7 +181,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
         const results = this.filterForContentToUpload(filestoUpload);
         //  console.log(results, 'filter results');
         this.imageUploadService.attachImage(id, results).subscribe(
-            event => {
+            (event) => {
                 switch (event.type) {
                     case HttpEventType.UploadProgress:
                         console.log(
@@ -194,7 +202,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
                 this.postLoanService.dismiss();
             }
         );
-        const selectedImages = this.uploadFiles.filter(item => item.filePath);
+        const selectedImages = this.uploadFiles.filter((item) => item.filePath);
         sessionStorage.setItem('imageResponse', JSON.stringify(selectedImages));
         // this.postLoanService.loading.dismiss();
     }
@@ -216,7 +224,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
                 const result = reader.result.toString().split(',')[1];
                 resolve(result);
             };
-            reader.onerror = error => reject(error);
+            reader.onerror = (error) => reject(error);
         });
     }
 }
