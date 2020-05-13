@@ -8,6 +8,7 @@ import { IReplacement, IActiveLoans } from '../active-loans/active-loans.model';
 import { IEligibiity as IEligibility } from '../active-loans/eligibility.model';
 import { ITeam } from './teamMembers.model';
 import { throttleTime } from 'rxjs/operators';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
     selector: 'app-post-loan',
@@ -32,7 +33,8 @@ export class PostLoanPage implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         private postLoanService: PostLoanService,
-        private imageUploadService: ImageUploadService
+        private imageUploadService: ImageUploadService,
+        private sharedService: SharedService
     ) {}
 
     ngOnInit() {
@@ -64,7 +66,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
                     Validators.min(this.whichIsbigger()),
                 ]),
             ],
-            netAmount: ['', Validators.required],
+            netAmount: ['', Validators.compose([Validators.required])],
             existingBalance: [this.replacementBalance, Validators.required],
             tenor: [
                 parseInt(this.eligibilityData.Tenor, 10),
@@ -143,25 +145,14 @@ export class PostLoanPage implements OnInit, OnDestroy {
 
     postLoan(form: FormGroup) {
         const netAmount = form.value.grossAmount - this.replacementBalance;
-        sessionStorage.setItem('netAmount', netAmount.toString());
-        this.postLoanService
-            .requestLoan(form.value)
-            .pipe(throttleTime(10000))
-            .subscribe((response) => {
-                const responseData = JSON.parse(response.Data);
-                sessionStorage.setItem('loanRequestResponse', response.Data);
-                console.log(response, 'loan posting response');
-                // this.postLoanService.presentLoadingWithOptions('Posting Loan');
-                this.postLoanService.present();
-                if (this.replacementLoanArray.length > 0) {
-                    this.compileLoan(
-                        this.replacementLoanArray,
-                        responseData.Id,
-                        netAmount
-                    );
-                }
-                this.imageUploadService.startImageUpload.emit(responseData.Id);
-            });
+        if (netAmount > 500) {
+            sessionStorage.setItem('netAmount', netAmount.toString());
+            this.postLoanRequest(netAmount, form.value);
+        } else {
+            this.sharedService.presentToast(
+                'Net Amount Cannot be less than 500'
+            );
+        }
         // this.imageUploadService.startImageUpload.emit('718');
     }
 
@@ -204,6 +195,29 @@ export class PostLoanPage implements OnInit, OnDestroy {
             .configureNetAmount(replacementLoansChosen)
             .subscribe((response) => {
                 console.log(response, 'replacement chosen');
+            });
+    }
+
+    // access loanRequest api
+    postLoanRequest(netAmount: number, formValue: any) {
+        this.postLoanService
+            .requestLoan(formValue)
+            .pipe(throttleTime(10000))
+            .subscribe((response) => {
+                const responseData = JSON.parse(response.Data);
+                sessionStorage.setItem('loanRequestResponse', response.Data);
+                console.log(response, 'loan posting response');
+                // this.postLoanService.presentLoadingWithOptions('Posting Loan');
+                this.postLoanService.present();
+                if (this.replacementLoanArray.length > 0) {
+                    this.compileLoan(
+                        this.replacementLoanArray,
+                        responseData.Id,
+                        netAmount
+                    );
+                }
+                // send request to image component to start sending images
+                this.imageUploadService.startImageUpload.emit(responseData.Id);
             });
     }
 

@@ -1,8 +1,8 @@
 {
-    "name": "FilmsLite",
+    "name": "Films Lite",
     "short_name": "FilmsLite",
     "theme_color": "#008080",
-    "background_color": "#fafafa",
+    "background_color": "#008080",
     "display": "standalone",
     "scope": "./",
     "start_url": "./",
