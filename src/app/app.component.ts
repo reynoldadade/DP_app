@@ -58,6 +58,11 @@ export class AppComponent {
             icon: 'walk',
         },
         {
+            title: 'Change Password',
+            url: '/change-password',
+            icon: 'lock-closed-outline',
+        },
+        {
             title: 'Logout',
             url: '/home',
             icon: 'power',

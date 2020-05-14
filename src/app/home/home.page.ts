@@ -41,12 +41,13 @@ export class HomePage implements OnInit {
         this.homeService.login(form.value).subscribe(
             (response: IToken) => {
                 this.sharedService.saveTokenInfo(response);
+                this.loginForm.reset();
                 this.router.navigate(['landing']);
                 this.spinner = false;
-                console.log(response);
+                // console.log(response);
                 this.getUserInfo();
             },
-            error1 => {
+            (error1) => {
                 this.complete = false;
                 console.log(error1, 'error');
                 if (error1.status === 400) {
@@ -73,7 +74,7 @@ export class HomePage implements OnInit {
     }
 
     getUserInfo() {
-        this.sharedService.getUserInfo().subscribe(response => {
+        this.sharedService.getUserInfo().subscribe((response) => {
             sessionStorage.setItem('userInfo', JSON.stringify(response));
             console.log(response, 'userinfo');
         });

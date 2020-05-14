@@ -11,7 +11,7 @@ const routes: Routes = [
     {
         path: 'home',
         loadChildren: () =>
-            import('./home/home.module').then(m => m.HomePageModule),
+            import('./home/home.module').then((m) => m.HomePageModule),
     },
     {
         path: 'loan-calculator',
@@ -93,7 +93,19 @@ const routes: Routes = [
             './confirm-commission-withdrawal/confirm-commission-withdrawal.module#ConfirmCommissionWithdrawalPageModule',
         canActivate: [AuthGuard],
     },
-  { path: 'commission-statement', loadChildren: './commission-statement/commission-statement.module#CommissionStatementPageModule' },
+    {
+        path: 'commission-statement',
+        loadChildren:
+            './commission-statement/commission-statement.module#CommissionStatementPageModule',
+    },
+    {
+        path: 'change-password',
+        loadChildren: () =>
+            import('./change-password/change-password.module').then(
+                (m) => m.ChangePasswordPageModule
+            ),
+        canActivate: [AuthGuard],
+    },
 ];
 
 @NgModule({
