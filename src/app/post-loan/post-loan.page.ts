@@ -9,6 +9,7 @@ import { IEligibiity as IEligibility } from '../active-loans/eligibility.model';
 import { ITeam } from './teamMembers.model';
 import { throttleTime } from 'rxjs/operators';
 import { SharedService } from '../shared/shared.service';
+import { element } from 'protractor';
 
 @Component({
     selector: 'app-post-loan',
@@ -182,17 +183,25 @@ export class PostLoanPage implements OnInit, OnDestroy {
     }
 
     compileLoan(loan: Array<IActiveLoans>, id: any, netAmount: number) {
-        const replacementLoansChosen = [] as Array<IReplacement>;
-        const loantoReplace = {} as IReplacement;
-        loan.forEach((element) => {
+        console.log(loan, '[loan]');
+        // loan.forEach((element) => {
+        //     loantoReplace.Id = id;
+        //     loantoReplace.NavLoanId = element.Loan_No;
+        //     loantoReplace.NetAmount = netAmount;
+        //     replacementLoansChosen.push(loantoReplace);
+        // }
+        // );
+        const replacementLoanChosen = loan.map((element) => {
+            const loantoReplace = {} as IReplacement;
             loantoReplace.Id = id;
             loantoReplace.NavLoanId = element.Loan_No;
             loantoReplace.NetAmount = netAmount;
-            replacementLoansChosen.push(loantoReplace);
+            return loantoReplace;
         });
-        console.log(replacementLoansChosen);
+        // console.log(a, '[replacementLoansChosen]');
+        // console.log(replacementLoansChosen);
         this.postLoanService
-            .configureNetAmount(replacementLoansChosen)
+            .configureNetAmount(replacementLoanChosen)
             .subscribe((response) => {
                 console.log(response, 'replacement chosen');
             });
