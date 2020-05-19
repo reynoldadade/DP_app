@@ -184,13 +184,7 @@ export class PostLoanPage implements OnInit, OnDestroy {
 
     compileLoan(loan: Array<IActiveLoans>, id: any, netAmount: number) {
         console.log(loan, '[loan]');
-        // loan.forEach((element) => {
-        //     loantoReplace.Id = id;
-        //     loantoReplace.NavLoanId = element.Loan_No;
-        //     loantoReplace.NetAmount = netAmount;
-        //     replacementLoansChosen.push(loantoReplace);
-        // }
-        // );
+
         const replacementLoanChosen = loan.map((element) => {
             const loantoReplace = {} as IReplacement;
             loantoReplace.Id = id;
